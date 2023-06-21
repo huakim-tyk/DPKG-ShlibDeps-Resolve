@@ -1,6 +1,6 @@
 package DPKG::ShlibDeps::Resolve;
 no warnings 'deprecated';
-use DPKG::Parse::Info
+use DPKG::Parse::Info;
 use Dpkg::Shlibs::Objdump;
 use Dpkg::Shlibs qw(find_library);
 use Algorithm::Loops qw(NestedLoops);
