@@ -1,0 +1,5 @@
+libdpkg-shlibdeps-resolve-perl (0.0.4-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- lenovo <lenovo@>  Sun, 25 Jun 2023 19:28:30 +0300

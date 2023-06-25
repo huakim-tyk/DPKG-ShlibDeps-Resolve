@@ -1,0 +1,26 @@
+Source: libdpkg-shlibdeps-resolve-perl
+Maintainer: lenovo <lenovo@>
+Section: perl
+Priority: optional
+Build-Depends: debhelper-compat (= 13)
+Build-Depends-Indep: libalgorithm-loops-perl <!nocheck>,
+                     libdpkg-parse-perl <!nocheck>,
+                     libdpkg-perl <!nocheck>,
+                     libscalar-list-utils-perl <!nocheck>,
+                     perl
+Standards-Version: 4.6.2
+Homepage: https://metacpan.org/release/DPKG-ShlibDeps-Resolve
+Rules-Requires-Root: no
+
+Package: libdpkg-shlibdeps-resolve-perl
+Architecture: all
+Depends: ${misc:Depends},
+         ${perl:Depends},
+         libalgorithm-loops-perl,
+         libdpkg-parse-perl,
+         libdpkg-perl,
+         libscalar-list-utils-perl
+Description: Library for resolving shared library dependencies for dpkg-based systems
+ (no description was found)
+ .
+ This description was automagically extracted from the module by dh-make-perl.

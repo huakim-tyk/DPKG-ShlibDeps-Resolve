@@ -159,7 +159,14 @@ Returns a (possibly empty) list of packages containing needed libraries.
 
 sub scan_shared_lib
 {
-    my ( $class, $path, $extra) = @_;
+    my $class   =   $_{'info'};
+    my $path    =   $_{'base'};
+    my $extra   =   $_{'root'};
+    
+    if (!defined $class){
+        $class = DPKG::Parse::Info->new;
+        $info->parse;   
+    }
 
     my $s = Set::Scalar->new;
     
@@ -173,7 +180,7 @@ sub scan_shared_lib
         $s->insert(@$_);
     }
     
-    return $class->scan_full_paths($s);
+    return $class->scan_contains_paths($s);
 }
 
 1;
