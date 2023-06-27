@@ -2,6 +2,7 @@ package DPKG::ShlibDeps::Resolve;
 no warnings 'deprecated';
 use DPKG::Parse::Info;
 use Dpkg::Shlibs::Objdump;
+use Set::Scalar;
 use Dpkg::Shlibs qw(find_library);
 use Algorithm::Loops qw(NestedLoops);
 use List::Util qw(sum);
@@ -15,11 +16,11 @@ dependencies
 
 =head1 VERSION
 
-Version 0.02
+Version 0.01
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.01';
 
 
 =head1 SYNOPSIS
@@ -79,6 +80,7 @@ sub find_libraries{
         }
         
         while (defined $obj){
+            
             my @objs = ();
             
             if (!$obj->isa('Dpkg::Shlibs::Objdump::Object')){
@@ -156,12 +158,14 @@ Scans dpkg file lists for files, whose needed by shared library.
 Returns a (possibly empty) list of packages containing needed libraries.
 
 =cut
-
+use Data::Dumper;
 sub scan_shared_lib
 {
-    my $class   =   $_{'info'};
-    my $path    =   $_{'base'};
-    my $extra   =   $_{'root'};
+    
+    my $h = {@_};
+    my $class   =   $h->{'info'};
+    my $path    =   $h->{'base'};
+    my $extra   =   $h->{'root'};
     
     if (!defined $class){
         $class = DPKG::Parse::Info->new;
@@ -175,6 +179,7 @@ sub scan_shared_lib
     if (defined $extra){
         $libs = find_missed_libraries($libs, $extra);
     }
+    
     
     for (values %$libs){
         push @s, @$_;
