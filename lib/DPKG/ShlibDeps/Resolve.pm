@@ -15,11 +15,11 @@ dependencies
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
@@ -165,10 +165,10 @@ sub scan_shared_lib
     
     if (!defined $class){
         $class = DPKG::Parse::Info->new;
-        $info->parse;   
+        $class->parse;   
     }
 
-    my $s = Set::Scalar->new;
+    my @s;
     
     my $libs = find_libraries($path);
     
@@ -177,10 +177,10 @@ sub scan_shared_lib
     }
     
     for (values %$libs){
-        $s->insert(@$_);
+        push @s, @$_;
     }
     
-    return $class->scan_contains_paths($s);
+    return $class->scan_contains_paths(\@s);
 }
 
 1;
